@@ -1,6 +1,6 @@
-﻿namespace ProjektMVC.Db.ValueObjects
+﻿namespace ProjektMVC.Data.ValueObjects
 {
-	public enum PizzaPrice
+	public enum PizzaSize
 	{
 		//[DisplayName("Mała")]
 		Small = 1, 

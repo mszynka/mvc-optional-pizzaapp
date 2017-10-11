@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ProjektMVC.Db.ValueObjects;
+using ProjektMVC.Data.ValueObjects;
 
-namespace ProjektMVC.Db.Models
+namespace ProjektMVC.Data.Models
 {
 	public class Pizza
 	{
