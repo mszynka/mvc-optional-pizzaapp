@@ -51,6 +51,8 @@
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\Pizza.cs" />
     <Compile Include="Models\PizzaIngredient.cs" />
+    <Compile Include="Repositories\IngredientRepository.cs" />
+    <Compile Include="Repositories\PizzaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValueObjects\PizzaPieThickness.cs" />
     <Compile Include="ValueObjects\PizzaSize.cs" />
