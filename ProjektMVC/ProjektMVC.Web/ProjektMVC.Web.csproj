@@ -149,10 +149,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AddController.cs" />
+    <Compile Include="Controllers\DetailsController.cs" />
     <Compile Include="Controllers\ListController.cs" />
+    <Compile Include="Controllers\RemoveController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddIngredientModel.cs" />
+    <Compile Include="Models\AddPizzaModel.cs" />
+    <Compile Include="Models\RemoveIngredientModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -192,10 +197,11 @@
     <Content Include="Views\List\Menu.cshtml" />
     <Content Include="Views\Add\AddPizza.cshtml" />
     <Content Include="Views\Add\AddIngredient.cshtml" />
+    <Content Include="Views\Details\Pizza.cshtml" />
+    <Content Include="Views\Remove\Ingredient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -214,6 +220,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{E55F69CB-F4A9-4F29-A2DE-967DFC8B5534}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProjektMVC.Data\ProjektMVC.Data.csproj">
       <Project>{470e8777-77f5-4e40-9d11-32886a941332}</Project>
       <Name>ProjektMVC.Data</Name>

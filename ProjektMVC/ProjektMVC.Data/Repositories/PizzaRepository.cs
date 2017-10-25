@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common;
 using ProjektMVC.Data.Contexts;
 using ProjektMVC.Data.Models;
+using ProjektMVC.Data.ValueObjects;
 
 namespace ProjektMVC.Data.Repositories
 {
@@ -11,7 +13,48 @@ namespace ProjektMVC.Data.Repositories
 		{
 			using (var db = new PizzaContext())
 			{
-				return db.Pizzas.ToList();
+				return db.Pizzas
+					.Include(nameof(Pizza.Ingredients))
+					.ToList();
+			}
+		}
+
+		public Option<Pizza> Get(int id)
+		{
+			using(var db = new PizzaContext())
+			{
+				return db.Pizzas
+					.Include(nameof(Pizza.Ingredients))
+					.AsNoTracking()
+					.FirstOrDefault(x => x.PizzaId == id)
+					.AsOption<Pizza>();
+			}
+		}
+
+		public void Add(string name, PizzaSize size, PizzaPieThickness thickness, List<PizzaIngredient> ingredients)
+		{
+			using (var db = new PizzaContext())
+			{
+				db.Pizzas.Add(new Pizza
+				{
+					Name = name,
+					Size = size,
+					Thickness = thickness,
+					Ingredients = ingredients
+				});
+				db.SaveChanges();
+			}
+		}
+
+		public List<Pizza> GetAllByIngredient(int ingredientId)
+		{
+			using(var db = new PizzaContext())
+			{
+				return db.Pizzas
+					.Include(nameof(Pizza.Ingredients))
+					.AsNoTracking()
+					.Where(p => p.Ingredients.Any(i => i.IngredientId == ingredientId))
+					.ToList();
 			}
 		}
 	}

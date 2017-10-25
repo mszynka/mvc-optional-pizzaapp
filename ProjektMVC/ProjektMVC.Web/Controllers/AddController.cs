@@ -1,16 +1,18 @@
 ﻿using System.Web.Mvc;
 using ProjektMVC.Data.Repositories;
+using ProjektMVC.Web.Models;
 
 namespace ProjektMVC.Web.Controllers
 {
 	public sealed class AddController : Controller
 	{
-		public PizzaRepository PizzaRepository;
-		public IngredientRepository IngredientRepository;
+		private readonly PizzaRepository _pizzaRepository;
+		private readonly IngredientRepository _ingredientRepository;
 
 		public AddController()
 		{
-			PizzaRepository = new PizzaRepository();
+			_pizzaRepository = new PizzaRepository();
+			_ingredientRepository = new IngredientRepository();
 		}
 
 		[HttpGet]
@@ -20,25 +22,27 @@ namespace ProjektMVC.Web.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult AddIngredient(string pizzaFilter)
+		public ActionResult AddIngredient(AddIngredientModel model)
 		{
-			return View();
+			_ingredientRepository.Add(model.Name);
+			return RedirectToAction("Ingredients", "List");
 		}
 
 		[HttpGet]
 		public ActionResult AddPizza()
 		{
-			ViewBag.Message = "Your application description page.";
-
-			return View();
+			var ingredients = _ingredientRepository.GetAll();
+			return View(new AddPizzaModel
+			{
+				IngredientsDictionary = ingredients
+			});
 		}
 
 		[HttpPost]
-		public ActionResult AddPizza(string pizzaFilter)
+		public ActionResult AddPizza(AddPizzaModel model)
 		{
-			ViewBag.Message = "Your application description page.";
-
-			return View();
+			_pizzaRepository.Add(model.Name, model.Size, model.Thickness, model.Ingredients);
+			return RedirectToAction("Menu", "List");
 		}
 	}
 }

@@ -1,36 +1,40 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
-using ProjektMVC.Data;
 using ProjektMVC.Data.Repositories;
 
 namespace ProjektMVC.Web.Controllers
 {
 	public class ListController : Controller
 	{
-		public PizzaRepository PizzaRepository;
+		private readonly PizzaRepository _pizzaRepository;
+		private readonly IngredientRepository _ingredientRepository;
 
 		public ListController()
 		{
-			PizzaRepository = new PizzaRepository();
+			_pizzaRepository = new PizzaRepository();
+			_ingredientRepository = new IngredientRepository();
 		}
 
 		public ActionResult Menu(string pizzaFilter = null)
 		{
-			var pizzas = PizzaRepository.GetAll();
+			var pizzas = _pizzaRepository.GetAll();
 
 			if (!string.IsNullOrWhiteSpace(pizzaFilter))
 				pizzas = pizzas
-					.Where(x => x.Name.StartsWith(pizzaFilter))
+					.Where(x => x.Name.StartsWith(pizzaFilter, StringComparison.CurrentCultureIgnoreCase))
 					.ToList();
+
+			ViewBag.pizzaFilter = pizzaFilter;
 
 			return View(pizzas);
 		}
 
 		public ActionResult Ingredients()
 		{
-			ViewBag.Message = "Your application description page.";
+			var ingredients = _ingredientRepository.GetAll();
 
-			return View();
+			return View(ingredients);
 		}
 	}
 }

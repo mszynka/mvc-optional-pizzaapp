@@ -3,12 +3,12 @@
 	public enum PizzaSize
 	{
 		//[DisplayName("Mała")]
-		Small = 1, 
+		Small, 
 
 		//[DisplayName("Średnia")]
-		Medium = 2,
+		Medium,
 
 		//[DisplayName("Duża")]
-		Large = 3
+		Large
 	}
 }

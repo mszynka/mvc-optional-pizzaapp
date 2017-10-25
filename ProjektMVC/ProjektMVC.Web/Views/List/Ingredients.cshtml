@@ -1,17 +1,30 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@model  IEnumerable<ProjektMVC.Data.Models.Ingredient>
+@{
+    ViewBag.Title = "Ingredients";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h3>That's our ingredients menu</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="row">
+	@if (!Model.Any())
+	{
+		<h3>There are no ingredients available. Sorry for the inconvenience.</h3>
+	}
+	else
+	{
+		<ul class="list-group">
+			@foreach(var ingredient in Model)
+			{
+				<li class="list-group-item" id="ingredient@(ingredient.IngredientId)">
+					@ingredient.Name
+					<span class="badge">
+						@Html.ActionLink("Delete", "Ingredient", "Remove", new { @ingredientId = ingredient.IngredientId }, null)
+					</span>
+					@*<span class="badge">
+						@Html.ActionLink("Edit", "Ingredients", "Rename", new { @id = ingredient.IngredientId }, null)
+					</span>*@
+				</li>
+			}
+		</ul>
+	}
+</div>
