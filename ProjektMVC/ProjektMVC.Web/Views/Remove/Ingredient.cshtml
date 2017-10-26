@@ -1,39 +1,36 @@
 ﻿@model ProjektMVC.Web.Models.RemoveIngredientModel
 @{
-    ViewBag.Title = "Remove ingredient";
+	ViewBag.Title = "Remove ingredient";
 }
 
-<h2>Remove ingredient</h2>
+<h2>You are about to remove ingredient!</h2>
 
-<div class="row">
+<div class="form-group">
+	@Html.LabelFor(t => t.IngredientName, new { @class = "control-label col-sm-2" })
+	@Html.ValueFor(t => t.IngredientName)
+</div>
 
-	<h3>You are about to remove ingredient!</h3>	
-
-	<div class="form-group">
-		@Html.LabelFor(t => t.IngredientName, new { @class = "control-label col-sm-2" })
-		<div class="col-sm-10">
-			@Html.ValueFor(t => t.IngredientName)
+@if (!Model.PizzasWithIngredient.Any())
+{
+	<form action="/Remove/RemoveIngredient?ingredientId=@(Model.IngredientId)" method="post" class="form-horizontal">
+		<div class="col-sm-10 col-sm-offset-2">
+			<input type="submit" value="Remove ingredient" />
 		</div>
-	</div>
-
-	@if (!Model.PizzasWithIngredient.Any())
-	{
-		<form action="/Remove/RemoveIngredient?ingredientId=@(Model.IngredientId)" method="post" class="form-horizontal">
-			<div class="col-sm-10 col-sm-offset-2">
-				<input type="submit" value="Remove ingredient"/>
-			</div>
-		</form>
-	}
-	else
-	{
-		<h5>Ingredient used also in:</h5>
-		<ul class="list-group">
-			@foreach (var pizza in Model.PizzasWithIngredient)
-			{
-				<li class="list-group-item" id="ingredient@(pizza.PizzaId)">
+	</form>
+}
+else
+{
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Ingredient used also in:</label>
+		<div>
+			<ul style="padding-left: 0">
+				@foreach (var pizza in Model.PizzasWithIngredient)
+				{
+				<li id="ingredient@(pizza.PizzaId)" style="list-style-type: none">
 					@pizza.Name
 				</li>
-			}
-		</ul>
-	}
-</div>
+				}
+			</ul>
+		</div>
+	</div>
+}

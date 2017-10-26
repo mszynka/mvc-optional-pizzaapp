@@ -1,0 +1,17 @@
+﻿@model ProjektMVC.Web.Models.RenameIngredientModel
+
+<h2>Add ingredient</h2>
+
+<form action="/Rename/RenameIngredient" method="post" class="form-horizontal">
+	@Html.HiddenFor(t => t.Id)
+	<div class="form-group">
+		@Html.LabelFor(t => t.Name, new {@class = "control-label col-sm-2"})
+		<div class="col-sm-10">
+			@Html.TextBoxFor(t => t.Name, new {@class = "form-control"})
+		</div>
+	</div>
+
+	<div class="col-sm-10 col-sm-offset-2">
+		<input type="submit" value="Rename ingredient"/>
+	</div>
+</form>

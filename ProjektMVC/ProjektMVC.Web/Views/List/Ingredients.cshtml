@@ -20,9 +20,9 @@
 					<span class="badge">
 						@Html.ActionLink("Delete", "Ingredient", "Remove", new { @ingredientId = ingredient.IngredientId }, null)
 					</span>
-					@*<span class="badge">
-						@Html.ActionLink("Edit", "Ingredients", "Rename", new { @id = ingredient.IngredientId }, null)
-					</span>*@
+					<span class="badge">
+						@Html.ActionLink("Rename", "Ingredient", "Rename", new { @id = ingredient.IngredientId }, null)
+					</span>
 				</li>
 			}
 		</ul>

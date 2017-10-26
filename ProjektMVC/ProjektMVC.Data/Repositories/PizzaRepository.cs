@@ -25,6 +25,7 @@ namespace ProjektMVC.Data.Repositories
 			{
 				return db.Pizzas
 					.Include(nameof(Pizza.Ingredients))
+					.Include("Ingredients.Ingredient")
 					.AsNoTracking()
 					.FirstOrDefault(x => x.PizzaId == id)
 					.AsOption<Pizza>();
@@ -35,13 +36,18 @@ namespace ProjektMVC.Data.Repositories
 		{
 			using (var db = new PizzaContext())
 			{
-				db.Pizzas.Add(new Pizza
+				var entity = new Pizza
 				{
 					Name = name,
 					Size = size,
 					Thickness = thickness,
 					Ingredients = ingredients
-				});
+				};
+				db.Pizzas.Add(entity);
+				foreach(var ingredient in ingredients)
+				{
+					ingredient.Pizza = entity;
+				}
 				db.SaveChanges();
 			}
 		}

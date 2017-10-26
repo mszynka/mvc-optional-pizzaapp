@@ -152,12 +152,14 @@
     <Compile Include="Controllers\DetailsController.cs" />
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\RemoveController.cs" />
+    <Compile Include="Controllers\RenameController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AddIngredientModel.cs" />
     <Compile Include="Models\AddPizzaModel.cs" />
     <Compile Include="Models\RemoveIngredientModel.cs" />
+    <Compile Include="Models\RenameIngredientModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +201,7 @@
     <Content Include="Views\Add\AddIngredient.cshtml" />
     <Content Include="Views\Details\Pizza.cshtml" />
     <Content Include="Views\Remove\Ingredient.cshtml" />
+    <Content Include="Views\Rename\Ingredient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

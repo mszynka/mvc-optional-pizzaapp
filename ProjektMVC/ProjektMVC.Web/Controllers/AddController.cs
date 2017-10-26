@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using ProjektMVC.Data.Models;
 using ProjektMVC.Data.Repositories;
 using ProjektMVC.Web.Models;
 
@@ -41,6 +43,15 @@ namespace ProjektMVC.Web.Controllers
 		[HttpPost]
 		public ActionResult AddPizza(AddPizzaModel model)
 		{
+			var ingredients = HttpContext.Request.Form.Get("Ingredients").Split(',').Select(int.Parse);
+			foreach(var ingredient in ingredients)
+			{
+				model.Ingredients.Add(new PizzaIngredient
+				{
+					IngredientId = ingredient
+				});
+			}
+
 			_pizzaRepository.Add(model.Name, model.Size, model.Thickness, model.Ingredients);
 			return RedirectToAction("Menu", "List");
 		}

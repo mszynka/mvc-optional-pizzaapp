@@ -49,5 +49,17 @@ namespace ProjektMVC.Data.Repositories
 				db.SaveChanges();
 			}
 		}
+
+		public void Rename(int ingredientId, string ingredientName)
+		{
+			using (var db = new PizzaContext())
+			{
+				var ingredient = db.Ingredients.Find(ingredientId);
+				if (ingredient != null) 
+					ingredient.Name = ingredientName;
+
+				db.SaveChanges();
+			}
+		}
 	}
 }

@@ -22,11 +22,11 @@
 
 <div class="form-group">
     @Html.LabelFor(t => t.Ingredients, new { @class = "control-label col-sm-2" })
-    <div class="col-sm-10">
-        <select class="js-example-basic-multiple form-control" name="Ingredients" multiple="multiple">
+    <div>
+        <ul name="Ingredients" style="padding-left: 0">
             @foreach (var ingredient in Model.Ingredients)
             {
-                <option value="@ingredient.IngredientId">@ingredient.Ingredient.Name</option>}
-        </select>
+                <li value="@ingredient.IngredientId" style="list-style-type: none">@ingredient.Ingredient.Name</li>}
+        </ul>
     </div>
 </div>
