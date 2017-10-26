@@ -22,6 +22,9 @@
             {
                 <li class="list-group-item">
                     @Html.ActionLink(pizza.Name, "Pizza", "Details", new { @id = pizza.PizzaId}, null)
+	                <span class="badge">
+		                @Html.ActionLink("Delete", "Pizza", "Remove", new { @pizzaId = pizza.PizzaId }, null)
+	                </span>
                     <span class="badge">
                         @pizza.Ingredients.Count
                     </span>

@@ -48,5 +48,33 @@ namespace ProjektMVC.Web.Controllers
 
 			return RedirectToAction("Ingredients", "List");
 		}
+
+		[HttpGet]
+		public ActionResult Pizza(int pizzaId)
+		{
+			var pizza = _pizzaRepository.Get(pizzaId);
+			if (!pizza.Any())
+			{
+				ViewBag.Error = "Cannot find pizza";
+				return RedirectToAction("Menu", "List");
+			}
+
+			return View(pizza.Single());
+		}
+
+		[HttpPost]
+		public ActionResult RemovePizza(int pizzaId)
+		{
+			var pizza = _pizzaRepository.Get(pizzaId);
+			if (!pizza.Any())
+			{
+				ViewBag.Error = "Cannot find pizza";
+				return RedirectToAction("Menu", "List");
+			}
+
+			_pizzaRepository.Remove(pizzaId);
+
+			return RedirectToAction("Menu", "List");
+		}
 	}
 }

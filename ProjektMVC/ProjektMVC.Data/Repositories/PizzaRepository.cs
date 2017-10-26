@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Common;
 using ProjektMVC.Data.Contexts;
@@ -61,6 +62,16 @@ namespace ProjektMVC.Data.Repositories
 					.AsNoTracking()
 					.Where(p => p.Ingredients.Any(i => i.IngredientId == ingredientId))
 					.ToList();
+			}
+		}
+
+		public void Remove(int pizzaId)
+		{
+			using (var db = new PizzaContext())
+			{
+				var pizza = db.Pizzas.Find(pizzaId);
+				db.Pizzas.Remove(pizza ?? throw new InvalidOperationException());
+				db.SaveChanges();
 			}
 		}
 	}
